@@ -1,0 +1,265 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>汽车销量排行榜</title>
+
+    <!-- Favicons -->
+    <link href="static/img/favicon.png" rel="icon">
+    <link href="static/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Vendor CSS Files -->
+    <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/vendor/iconfont/iconfont.css" rel="stylesheet">
+    <link href="static/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="static/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="static/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="static/vendor/aos/aos.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="static/css/style.css" rel="stylesheet">
+    <!-- 引入刚刚下载的 ECharts 文件 -->
+    <script src="static/js/echarts.min.js"></script>
+
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="container">
+
+      <div class="logo float-left">
+        <h1 class="text-light"><a href="index.html"><span>许伟杰</span></a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="static/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+      <nav class="nav-menu float-right d-none d-lg-block">
+        <ul>
+          <li><a href="/">首页<i class="la la-angle-down"></i></a></li>
+          <li><a href="/rank">电影排行</a></li>
+          <li class="active"><a href="/brand">年份上榜数</a></li>
+          <li><a href="/energy">奇怪统计</a></li>
+        </ul>
+      </nav><!-- .nav-menu -->
+    </div>
+  </header><!-- End Header -->
+
+<main id="main1">
+
+    <!-- ======= About Us Section ======= -->
+    <section id="about1" class="services" style="background-color: #f9f9f9;border: 1px solid #ccc;border-radius: 5px;margin: 10px 100px;">
+        <div class="container">
+            <div class="section-title">
+                <h2>每20年间最热电影数</h2>
+            </div>
+            <div style="width: 100%">
+                <div id="main2" style="width: 100%;height:500px;"></div>
+                <script type="text/javascript">
+                    // 基于准备好的dom，初始化echarts实例
+                    var myChart = echarts.init(document.getElementById('main2'));
+
+                    // 指定图表的配置项和数据
+                    var option = {
+                          tooltip: {
+                            trigger: 'item'
+                          },
+                          legend: {
+                            top: '5%',
+                            left: 'center'
+                          },
+                          series: [
+                            {
+                              name: 'Access From',
+                              type: 'pie',
+                              radius: ['40%', '70%'],
+                              avoidLabelOverlap: false,
+                              itemStyle: {
+                                borderRadius: 10,
+                                borderColor: '#fff',
+                                borderWidth: 2
+                              },
+                              label: {
+                                show: false,
+                                position: 'center'
+                              },
+                              emphasis: {
+                                label: {
+                                  show: true,
+                                  fontSize: 40,
+                                  fontWeight: 'bold'
+                                }
+                              },
+                              labelLine: {
+                                show: false
+                              },
+                              data: {{num|tojson}}
+                            }
+                          ]
+                        };
+
+                    // 使用刚指定的配置项和数据显示图表。
+                    myChart.setOption(option);
+                </script>
+            </div>
+        </div>
+    </section><!-- End About Us Section -->
+
+    <!-- ======= About Us Section ======= -->
+    <section id="about" class="services" style="background-color: #f9f9f9;border: 1px solid #ccc;border-radius: 5px;margin: 10px 100px;">
+        <div class="container">
+            <div class="section-title">
+                <h2>年份最热电影数量TOP10</h2>
+            </div>
+            <div style="width: 100%">
+                <div id="main" style="width: 100%;height:500px;"></div>
+                <script type="text/javascript">
+                    // 基于准备好的dom，初始化echarts实例
+                    const colors = ['#5470C6', '#91CC75', '#EE6666'];
+                    var myChart = echarts.init(document.getElementById('main'));
+
+                    // 指定图表的配置项和数据
+                    var option = {
+                        color: colors,
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {
+                                type: 'cross'
+                            }
+                        },
+                        grid: {
+                            right: '20%'
+                        },
+                        toolbox: {
+                            feature: {
+                                dataView: {show: true, readOnly: false},
+                                restore: {show: true},
+                                saveAsImage: {show: true}
+                            }
+                        },
+                        legend: {
+                            data: ['最高分', '最低分', '数量']
+                        },
+                        xAxis: [
+                            {
+                                type: 'category',
+                                axisTick: {
+                                    alignWithLabel: true
+                                },
+                                // prettier-ignore
+                                data: {{xAxis|tojson}}
+                            }
+                        ],
+                        yAxis: [
+                            {
+                                type: 'value',
+                                name: '最高分',
+                                position: 'right',
+                                alignTicks: true,
+                                axisLine: {
+                                    show: true,
+                                    lineStyle: {
+                                        color: colors[0]
+                                    }
+                                },
+                                axisLabel: {
+                                    formatter: '{value}分'
+                                }
+                            },
+                            {
+                                type: 'value',
+                                name: '最低分',
+                                position: 'right',
+                                alignTicks: true,
+                                offset: 50,
+                                axisLine: {
+                                    show: true,
+                                    lineStyle: {
+                                        color: colors[1]
+                                    }
+                                },
+                                axisLabel: {
+                                    formatter: '{value}分'
+                                }
+                            },
+                            {
+                                type: 'value',
+                                name: '数量',
+                                position: 'left',
+                                alignTicks: true,
+                                axisLine: {
+                                    show: true,
+                                    lineStyle: {
+                                        color: colors[2]
+                                    }
+                                },
+                                axisLabel: {
+                                    formatter: '{value}'
+                                }
+                            }
+                        ],
+                        series: [
+                            {
+                                name: '最高分',
+                                type: 'bar',
+                                data: {{max|tojson}}
+                            },
+                            {
+                                name: '最低分',
+                                type: 'bar',
+                                yAxisIndex: 1,
+                                data: {{min|tojson}}
+                            },
+                            {
+                                name: '数量',
+                                type: 'line',
+                                yAxisIndex: 2,
+                                data: {{seriesNum|tojson}}
+                            }
+                        ]
+                    };
+
+                    // 使用刚指定的配置项和数据显示图表。
+                    myChart.setOption(option);
+                </script>
+            </div>
+        </div>
+    </section><!-- End About Us Section -->
+</main><!-- End #main -->
+
+{% include 'footer.html' %}
+
+<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="static/vendor/jquery/jquery.min.js"></script>
+<script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="static/vendor/jquery.easing/jquery.easing.min.js"></script>
+<!--<script src="static/vendor/php-email-form/validate.js"></script>-->
+<script src="static/vendor/jquery-sticky/jquery.sticky.js"></script>
+<script src="static/vendor/venobox/venobox.min.js"></script>
+<script src="static/vendor/waypoints/jquery.waypoints.min.js"></script>
+<script src="static/vendor/counterup/counterup.min.js"></script>
+<script src="static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="static/vendor/aos/aos.js"></script>
+
+<!-- Template Main JS File -->
+<script src="static/js/main.js"></script>
+
+<style>
+    .copyrights {
+        text-indent: -9999px;
+        height: 0;
+        line-height: 0;
+        font-size: 0;
+        overflow: hidden;
+    }
+</style>
+<div class="copyrights" id="links20210126">
+    Collect from <a href="http://www.cssmoban.com/" title="网站模板">模板之家</a>
+    <a href="https://www.chazidian.com/" title="查字典">查字典</a>
+</div>
+</body>
+
+</html>

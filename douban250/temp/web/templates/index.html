@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="referrer" content="never">
+
+    <title>豆瓣TOP榜</title>
+    <meta content="" name="descriptison">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="static/img/favicon.png" rel="icon">
+    <link href="static/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i,900"
+          rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/vendor/iconfont/iconfont.css" rel="stylesheet">
+    <link href="static/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="static/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="static/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="static/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="static/vendor/aos/aos.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="static/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="container">
+
+      <div class="logo float-left">
+        <h1 class="text-light"><a href="index.html"><span>许伟杰</span></a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="static/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+      <nav class="nav-menu float-right d-none d-lg-block">
+        <ul>
+          <li class="active"><a href="/">首页<i class="la la-angle-down"></i></a></li>
+          <li><a href="/rank">电影排行</a></li>
+          <li><a href="/brand">年份上榜数</a></li>
+          <li><a href="/energy">奇怪统计</a></li>
+        </ul>
+      </nav><!-- .nav-menu -->
+    </div>
+  </header><!-- End Header -->
+
+<main id="main">
+    <section class="counts section-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 text-center" data-aos="fade-up">
+                    <div class="count-box">
+                        <!--                        <i class="icofont-simple-smile" style="color: #20b38e;"></i>-->
+                        <span class="iconfont icon-yajun"></span>
+                        <img style="width: 125px;height: auto" src="{{er[0][12]}}"/>
+                        <p style="font-weight: bolder">{{er[0][1]}}</p>
+                        <p>评分{{er[0][2]}}</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 text-center" data-aos="fade-up">
+                    <div class="count-box">
+                        <!--                        <i class="icofont-simple-smile" style="color: #20b38e;"></i>-->
+                        <span class="iconfont icon-guanjun" style="font-size: xxx-large"></span>
+                        <img style="width: 150px;height: auto" src="{{yi[0][12]}}"/>
+                        <p style="font-weight: bolder">{{yi[0][1]}}</p>
+                        <p>评分{{yi[0][2]}}</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 text-center" data-aos="fade-up">
+                    <div class="count-box">
+                        <!--                        <i class="icofont-simple-smile" style="color: #20b38e;"></i>-->
+                        <span class="iconfont icon-jijun"></span>
+                        <img style="width: 100px;height: auto" src="{{san[0][12]}}"/>
+                        <p style="font-weight: bolder">{{san[0][1]}}</p>
+                        <p>评分{{san[0][2]}}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End Counts Section -->
+
+    <!-- ======= About Us Section ======= -->
+    <section id="about" class="about">
+        <div class="container">
+
+            <div class="row no-gutters">
+                <div class="col-lg-5 video-box">
+                    <!--词云图-->
+                    <div class="section-title" style="padding: 30px;font-weight: bold;font-size: 18px">
+                        电影TOP云词图
+                    </div>
+                    <img src="static/img/wordcloud1.png" style="height: 800px;width: auto;margin: 0 50px" alt="">
+                </div>
+                <!--销量排行-->
+                <div class="col-lg-7 d-flex flex-column" style="padding: 10px;">
+
+                    <div class="section-title d-flex justify-content-between">
+                        <span style="font-weight: bold;font-size: 18px">电影TOP榜</span>
+                        <span><a href="/rank">更多</a></span>
+                    </div>
+                    <div style="width: 100%">
+                        <table class="table">
+                            <tr>
+                                <th>排名</th>
+                                <th>图片</th>
+                                <th>电影名称</th>
+                                <th>年份</th>
+                                <th>评分</th>
+                            </tr>
+                            {% for item in movie %}
+                            <tr>
+                                <td>{{item[3]}}</td>
+                                <td><img style="width: auto; height: 50px;" src="{{item[12]}}" /></td>
+                                <td>{{item[1]}}</td>
+                                <td>{{item[7]}}</td>
+                                <td>{{item[2]}}</td>
+                            </tr>
+
+                            {% endfor %}
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End About Us Section -->
+</main><!-- End #main -->
+
+{% include 'footer.html' %}
+
+<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="static/vendor/jquery/jquery.min.js"></script>
+<script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="static/vendor/jquery.easing/jquery.easing.min.js"></script>
+<script src="static/vendor/jquery-sticky/jquery.sticky.js"></script>
+<script src="static/vendor/venobox/venobox.min.js"></script>
+<script src="static/vendor/waypoints/jquery.waypoints.min.js"></script>
+<script src="static/vendor/counterup/counterup.min.js"></script>
+<script src="static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="static/vendor/aos/aos.js"></script>
+
+<!-- Template Main JS File -->
+<script src="static/js/main.js"></script>
+
+<style>
+    .copyrights {
+        text-indent: -9999px;
+        height: 0;
+        line-height: 0;
+        font-size: 0;
+        overflow: hidden;
+    }
+</style>
+<div class="copyrights" id="links20210126">
+    Collect from <a href="http://www.cssmoban.com/" title="网站模板">模板之家</a>
+    <a href="https://www.chazidian.com/" title="查字典">查字典</a>
+</div>
+</body>
+
+</html>

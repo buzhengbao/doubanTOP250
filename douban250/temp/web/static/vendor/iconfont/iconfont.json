@@ -1,0 +1,58 @@
+{
+  "id": "4570453",
+  "name": "spider 3",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "11757605",
+      "name": "冠军",
+      "font_class": "guanjun",
+      "unicode": "ea9c",
+      "unicode_decimal": 60060
+    },
+    {
+      "icon_id": "11757607",
+      "name": "亚军",
+      "font_class": "yajun",
+      "unicode": "ea9d",
+      "unicode_decimal": 60061
+    },
+    {
+      "icon_id": "11757624",
+      "name": "季军 ",
+      "font_class": "jijun",
+      "unicode": "ea9e",
+      "unicode_decimal": 60062
+    },
+    {
+      "icon_id": "17860461",
+      "name": "汇总数据",
+      "font_class": "huizongshuju",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "25504183",
+      "name": "rate",
+      "font_class": "rate",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "26346687",
+      "name": "冠军奖杯",
+      "font_class": "guanjunjiangbei",
+      "unicode": "ffd4",
+      "unicode_decimal": 65492
+    },
+    {
+      "icon_id": "39670347",
+      "name": "小轿车小汽车",
+      "font_class": "a-car4",
+      "unicode": "e756",
+      "unicode_decimal": 59222
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="referrer" content="never">
+
+    <title>豆瓣TOP榜</title>
+
+    <!-- Favicons -->
+    <link href="static/img/favicon.png" rel="icon">
+    <link href="static/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Vendor CSS Files -->
+    <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="static/css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="container">
+
+      <div class="logo float-left">
+        <h1 class="text-light"><a href="index.html"><span>许伟杰</span></a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="static/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+      <nav class="nav-menu float-right d-none d-lg-block">
+        <ul>
+          <li><a href="/">首页<i class="la la-angle-down"></i></a></li>
+          <li class="active"><a href="/rank">电影排行</a></li>
+          <li><a href="/brand">年份上榜数</a></li>
+          <li><a href="/energy">奇怪统计</a></li>
+        </ul>
+      </nav><!-- .nav-menu -->
+    </div>
+  </header><!-- End Header -->
+
+<main id="main">
+
+    <!-- ======= About Us Section ======= -->
+    <section id="about" class="services">
+        <div class="container" style="max-width: 1500px">
+            <div class="section-title">
+                <h2>电影TOP250</h2>
+            </div>
+            <div style="width: 100%">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>排名</th>
+                        <th>海报</th>
+                        <th>电影名称</th>
+                        <th>导演</th>
+                        <th>编剧</th>
+                        <th>主演</th>
+                        <th>年份</th>
+                        <th>地区</th>
+                        <th>类型</th>
+                        <th>语言</th>
+                        <th>片长</th>
+                        <th>评分</th>
+                        <th>介绍</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    </tbody>
+                    <div id="toast">
+                    </div>
+                </table>
+            </div>
+        </div>
+    </section><!-- End About Us Section -->
+</main><!-- End #main -->
+
+{% include 'footer.html' %}
+
+<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="static/vendor/jquery/jquery.min.js"></script>
+<script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="static/vendor/jquery.easing/jquery.easing.min.js"></script>
+<!--<script src="static/vendor/php-email-form/validate.js"></script>-->
+<script src="static/vendor/jquery-sticky/jquery.sticky.js"></script>
+<script src="static/vendor/venobox/venobox.min.js"></script>
+<script src="static/vendor/waypoints/jquery.waypoints.min.js"></script>
+<script src="static/vendor/counterup/counterup.min.js"></script>
+<script src="static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="static/vendor/aos/aos.js"></script>
+
+<!-- Template Main JS File -->
+<script src="static/js/main.js"></script>
+<script>
+    $(document).ready(function () {
+        var pageOffset = 0  // 分页起点
+        var pageSize = 20  // 分页请求的记录数
+        var isLoading = false  //防止重复加载
+        var total = 100  //总记录数
+
+        // 读取分页内容
+        function getPage(start) {
+            if (isLoading || start > total) return
+            // alert('1')
+            isLoading = true
+            // 显示正在加载
+            $("#toast").html("正在加载")
+            // ajax异步请求数据
+            $.ajax({
+                url: '/getRank?start=' + start + '&pageSize=' + pageSize,
+                type: 'GET',
+                success: function (data) {
+                    console.log('返回的数据', data)
+                    // 遍历data[0]
+                    $.each(data[0], function (index, item) {
+                        $("#tbody").append(
+                            "<tr>" +
+                            "<td style='width: 60px'>" + item[3] + "</td>" +
+                            "<td><img style='width: 50px; height: auto;' src=" + item[12] + " /></td>" +
+                            "<td style='width: 120px'>" + item[1] + "</td>" +
+                            "<td style='width: 100px'>" + item[4] + "</td>" +
+                            "<td style='width: 100px'>" + item[5] + "</td>" +
+                            "<td>" + item[6] + "</td>" +
+                            "<td style='width: 60px'>" + item[7] + "</td>" +
+                            "<td style='width: 60px'>" + item[8] + "</td>" +
+                            "<td style='width: 70px'>" + item[9] + "</td>" +
+                            "<td style='width: 60px'>" + item[10] + "</td>" +
+                            "<td style='width: 60px'>" + item[11] + "分钟" + "</td>" +
+                            "<td style='width: 60px'>" + item[2] + "</td>" +
+                            "<td style='width: 120px'>" + item[13] + "</td>" +
+                            "</tr>"
+                        )
+                    })
+                    // 获取记录数
+                    total = data[1]
+                    isLoading = false
+                    if (data[0].length === 0) {
+                        $("#toast").html("已经到底了")
+                    } else {
+                        $("#toast").html("")
+                    }
+                },
+                error: function () {
+                    console.log('服务器出错')
+                    isLoading = false
+                }
+            })
+        }
+
+        // 加载第一页
+        getPage(pageOffset)
+        // 监听页面滚动，异步加载
+        $(window).scroll(function () {
+            if ($(window).scrollTop() + $(window).height() >= $(document).height()-10 && !isLoading) {
+                pageOffset += 20
+                getPage(pageOffset)
+            }
+        })
+    })
+</script>
+
+<style>
+    .copyrights {
+        text-indent: -9999px;
+        height: 0;
+        line-height: 0;
+        font-size: 0;
+        overflow: hidden;
+    }
+</style>
+<div class="copyrights" id="links20210126">
+    Collect from <a href="http://www.cssmoban.com/" title="网站模板">模板之家</a>
+    <a href="https://www.chazidian.com/" title="查字典">查字典</a>
+</div>
+</body>
+
+</html>
